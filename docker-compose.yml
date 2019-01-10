@@ -1,0 +1,25 @@
+version: "3"
+services:
+  app:
+    build: ./app
+    container_name: app
+    command: >
+      php
+      -d xdebug.remotenable=1
+      -d xdebug.remote_autostart=1
+      -d xdebug.remote_connect_back=0
+      -d xdebug.remote_port=9000
+      -d xdebug.remote_host=docker.for.mac.localhost
+      -d xdebug.idekey=idea
+      -S 0.0.0.0:8000 /app/index.php
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    restart: always
+  composer:
+    image: composer/composer:php7
+    container_name: composer
+    command: install
+    volumes:
+      - ./app:/app
