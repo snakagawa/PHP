@@ -5,11 +5,11 @@ services:
     container_name: app
     command: >
       php
-      -d xdebug.remotenable=1
+      -d xdebug.remote_enable=1
       -d xdebug.remote_autostart=1
       -d xdebug.remote_connect_back=0
       -d xdebug.remote_port=9000
-      -d xdebug.remote_host=host.docker.internal
+      -d xdebug.remote_host="host.docker.internal"
       -d xdebug.idekey=idea
       -S 0.0.0.0:8000 /app/index.php
     ports:
